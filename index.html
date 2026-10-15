@@ -5,22 +5,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <script src="https://kit.fontawesome.com/641f42e033.js" crossorigin="anonymous"></script>
-    
+
     </head>
     <body class="background">
-        <div id="music_player">
-            <img id="song_image" src="Assets/love-you-to-death-type-o-negative-inspired-record.svg">
-            <div id="song_name">Song</div>
-            <div id="song_artist">Artist</div>
 
-            <input id="slider_song" type="range" min="0" value="0" step="0.1" >
+        <svg width="0" height="0">
+            <filter id="flt">
+                <feTurbulence type="fractalNoise" baseFrequency=""></feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale=""></feDisplacementMap>
+            </filter>
+        </svg>
 
-            <div id="music_buttons">
-                <button id="shuffle_song" type="button"><i class="fa-solid fa-shuffle"></i></button>
-                <button id="prev_song" type="button" ><i class="fa-solid fa-backward-step fa-2x"></i></button>
-                <button id="playpause_song" type="button" ><i class="fa-solid fa-circle-play fa-3x"></i></button>
-                <button id="next_song" type="button" ><i class="fa-solid fa-forward-step fa-2x"></i></button>
-                <button id="repeat_song" type="button" ><i class="fa-solid fa-repeat"></i></button>
+
+        <div class="player_layout">
+            <div id="music_player">
+                <img id="song_image" src="Assets/love-you-to-death-type-o-negative-inspired-record.svg">
+                <div id="song_name">Song</div>
+                <div id="song_artist">Artist</div>
+
+                <input id="slider_song" type="range" min="0" value="0" step="0.1" >
+
+                <div id="music_buttons">
+                    <button id="shuffle_song" type="button"><i class="fa-solid fa-shuffle"></i></button>
+                    <button id="prev_song" type="button" ><i class="fa-solid fa-backward-step fa-2x"></i></button>
+                    <button id="playpause_song" type="button" ><i class="fa-solid fa-circle-play fa-3x"></i></button>
+                    <button id="next_song" type="button" ><i class="fa-solid fa-forward-step fa-2x"></i></button>
+                    <button id="repeat_song" type="button" ><i class="fa-solid fa-repeat"></i></button>
+                </div>
+
+
+            </div>
+            <div class="playlist">
+                <h2 id="playlist_title">Playlist</h2>
+                <label class="add_music">
+                    Add Music:
+                    <input id="audio_files" type="file" accept="audio/*" multiple>
+                </label>
+                <div id="playlist_items"></div>
             </div>
         </div>
         <script src="script.js"></script>

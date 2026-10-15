@@ -1,5 +1,27 @@
-.background{
-    background-color: bisque;
+.background {
+  background: linear-gradient(45deg, rgb(19, 0, 0), #880202, rgb(36, 2, 2), #a70e0e);
+  background-size: 400% 400%;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.player_layout{
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width:700px;
+    margin: 5% auto;
+    padding: 0 1rem;
+
+    backdrop-filter: url(#flt) blur(4px) saturate(180%);
+    box-shadow: inset 0 1px 0 #ffffff5c;
 }
 
 #music_player{
@@ -7,7 +29,69 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
+    margin-top: 10px;
+}
+
+.playlist {
+    position: relative;
+    box-sizing: border-box;
+    width: 280px;
+    padding: 1rem;
+    border-radius: 12px;
+    overflow-x: hidden;
+    border-width: 2px;
+    background-color:rgba(19, 0, 0, 0.2);
+}
+
+.playlist h2 {
+    margin-top: 0;
+}
+
+.add_music {
+    display:inline-block;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+#audio_files {
+    display:block;
+    max-width:100%;
+    margin-top: 0.5rem;
+}
+
+.playlist-track {
+    padding:0.65rem;
+    border: 0;
+    border-radius:6px;
+    background: transparent;
+    text-align:left;
+    cursor:pointer;
+}
+
+#playlist_items {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.playlist-track:hover,
+.playlist-track[aria-pressed="true"] {
+    background: #f2d8ca;
+}
+
+.playlist-track:focus-visible {
+    outline: 2px solid crimson;
+    outline-offset: 2px;
+}
+
+@media(max-width:700px) {
+    .player_layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .playlist {
+        width: min(100%, 400px);
+    }
 }
 
 #song_image{
@@ -19,6 +103,8 @@
 #song_name{
     margin-top: 20px;
     font-size: 2em;
+    width: 300px;
+    text-align: center;
 }
 
 #music_buttons{

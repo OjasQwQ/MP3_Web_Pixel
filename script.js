@@ -55,7 +55,6 @@ const audio = document.createElement("audio");
 let currentSongIndex = 0;
 let isShuffling = false;
 let isRepeating = false;
-updateSong();
 
 prevSongButton.addEventListener("click", function() {
     if (audio.currentTime > 3) {
@@ -154,11 +153,9 @@ function updateSong(autoplay = false) {
     songImg.src = song.image;
     songName.innerText = song.name;
     songArtist.innerText = song.artist;
+    renderPlayList();
 
     audio.src = song.audio;
-    audio.onloadedmetadata = function() {
-
-    }
     audio.load();
     songSlider.value = 0;
     songSlider.max = "0";
@@ -173,3 +170,42 @@ function moveSlider(){
     songSlider.value = audio.currentTime;
 };
  setInterval(moveSlider,1000);
+
+
+const playlistItems = document.getElementById("playlist_items");
+const audioFilesInput = document.getElementById("audio_files");
+
+function renderPlayList() {
+    playlistItems.replaceChildren();
+
+    songs.forEach((song,index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "playlist-track";
+        button.textContent = `${song.name} - ${song.artist}`;
+        button.setAttribute("aria-pressed", String(index === currentSongIndex));
+
+        button.addEventListener("click", function() {
+            currentSongIndex = index;
+            updateSong(true);
+        });
+
+        playlistItems.appendChild(button);
+    });
+}
+
+audioFilesInput.addEventListener("change", function() {
+    for (const file of audioFilesInput.files) {
+        songs.push({
+            image: "Assets/deftones-CD.svg",
+            name: file.name.replace(/\.[^/.]+$/, ""),
+            artist: "Local file",
+            audio: URL.createObjectURL(file)
+        });
+    }
+
+    renderPlayList();
+    audioFilesInput.value = "";
+});
+
+updateSong();
