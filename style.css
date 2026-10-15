@@ -1,0 +1,48 @@
+.background{
+    background-color: bisque;
+}
+
+#music_player{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+#song_image{
+    height:300px;
+    width:300px;
+    border-radius: 20px;
+}
+
+#song_name{
+    margin-top: 20px;
+    font-size: 2em;
+}
+
+#music_buttons{
+    display:flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#music_buttons i {
+    padding: 20px;
+}
+
+#slider_song{
+    appearance: none;
+    width: 300px;
+    height:5px;
+    background: black ;
+    margin-top: 1%;
+}
+
+#slider_song::-webkit-slider-thumb{
+    appearance: none;
+    background-color: crimson;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+}
