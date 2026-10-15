@@ -27,8 +27,21 @@
     margin-top: 20px;
 }
 
-#music_buttons i {
+#music_buttons button {
+    border: 0;
+    background: transparent;
+    color: inherit;
     padding: 20px;
+    cursor: pointer;
+}
+
+#music_buttons button[aria-pressed="true"] {
+    color: crimson;
+}
+
+#music_buttons button:focus-visible {
+    outline: 2px solid crimson;
+    outline-offset: 2px;
 }
 
 #slider_song{

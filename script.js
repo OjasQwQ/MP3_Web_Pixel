@@ -8,6 +8,9 @@ const songSlider = document.getElementById("slider_song");
 const playpauseButton = document.getElementById("playpause_song");
 const prevSongButton = document.getElementById("prev_song");
 const nextSongButton = document.getElementById("next_song");
+const shuffleButton = document.getElementById("shuffle_song");
+const repeatButton = document.getElementById("repeat_song");
+const playpauseIcon = playpauseButton.querySelector("i");
 
 const songs = [
     {
@@ -24,8 +27,8 @@ const songs = [
     },
     {
         image: "Assets/deftones-CD.svg",
-        name: "",
-        artist: "",
+        name: "My Own Summer (Shove It)",
+        artist: "Deftones",
         audio: "Assets/My_Own_Summer.mp3"
     },
     { 
@@ -50,39 +53,123 @@ const songs = [
 
 const audio = document.createElement("audio");
 let currentSongIndex = 0;
+let isShuffling = false;
+let isRepeating = false;
 updateSong();
 
-prevSongButton.addEventListener("click,", function() {
-    if(currentSongIndex == 0) {
+prevSongButton.addEventListener("click", function() {
+    if (audio.currentTime > 3) {
+        audio.currentTime = 0;
         return;
     }
-    currentSongIndex--;
-    updateSong()
+    if (currentSongIndex > 0) {
+        changeSong(currentSongIndex - 1);
+    }
 });
 
 nextSongButton.addEventListener("click", function() {
-    if (currentSongIndex== songs.length - 1) {
+    if (isShuffling) {
+        changeSong(getRandomSongIndex());
         return;
     }
-    currentSongIndex++;
-    updateSong()
+    if (currentSongIndex === songs.length - 1) {
+        return;
+    }
+    changeSong(currentSongIndex + 1);
 });
 
-playpauseButton.addEventListener("click", function() {
-    if (!audio.paused) {
+playpauseButton.addEventListener("click", async function() {
+    if (audio.paused) {
+        try {
+            await audio.play();
+        } catch (error) {
+            console.error("Unable to play the selected song:", error);
+        }
+    } else {
         audio.pause();
     }
-    audio.play();
-})
+});
 
-function updateSong() {
+shuffleButton.addEventListener("click", function() {
+    isShuffling = !isShuffling;
+});
+
+repeatButton.addEventListener("click", function() {
+    isRepeating = !isRepeating;
+});
+
+songSlider.addEventListener("input", function() {
+    if (Number.isFinite(audio.duration)) {
+        audio.currentTime = Number(songSlider.value);
+    }
+});
+
+audio.addEventListener("loadedmetadata", function() {
+    songSlider.max = String(audio.duration);
+});
+
+audio.addEventListener("timeupdate", function() {
+    songSlider.value = String(audio.currentTime);
+});
+
+audio.addEventListener("play", function() {
+    playpauseIcon.classList.replace("fa-circle-play", "fa-circle-pause");
+});
+
+audio.addEventListener("pause", function() {
+    playpauseIcon.classList.replace("fa-circle-pause", "fa-circle-play");
+});
+
+audio.addEventListener("ended", function() {
+    playpauseIcon.classList.replace("fa-circle-pause", "fa-circle-play");
+    if (isShuffling) {
+        currentSongIndex = getRandomSongIndex();
+    } else if (currentSongIndex < songs.length - 1) {
+        currentSongIndex++;
+    } else if (isRepeating) {
+        currentSongIndex = 0;
+    } else {
+        return;
+    }
+    updateSong(true);
+});
+
+function getRandomSongIndex() {
+    if (songs.length < 2) {
+        return currentSongIndex;
+    }
+    const offset = Math.floor(Math.random() * (songs.length - 1)) + 1;
+    return (currentSongIndex + offset) % songs.length;
+}
+
+function changeSong(songIndex) {
+    const shouldPlay = !audio.paused;
+    currentSongIndex = songIndex;
+    updateSong(shouldPlay);
+}
+
+function updateSong(autoplay = false) {
     const song = songs[currentSongIndex];
-    songImg.src= song.image;
+    audio.pause();
+    songImg.src = song.image;
     songName.innerText = song.name;
     songArtist.innerText = song.artist;
 
     audio.src = song.audio;
+    audio.onloadedmetadata = function() {
+
+    }
+    audio.load();
     songSlider.value = 0;
-    songSlider.max = audio.duration;
+    songSlider.max = "0";
+    if (autoplay) {
+        audio.play().catch(function(error) {
+            console.error("Unable to play the selected song:", error);
+        });
+    }
 }
 
+function moveSlider(){
+    songSlider.value = audio.currentTime;
+};
+ setInterval(moveSlider,1000);
