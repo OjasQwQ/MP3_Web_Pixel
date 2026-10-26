@@ -1,6 +1,6 @@
 # MP3_Web_Pixel
 
-A music player website with a dark red gothic interface MADE FOR THE PIXELL EVENT. It features a vinyl-style album cover (which doesn't spin), playback controls, a progress bar, and a playlist where you can add your own audio files. 
+A music player website with a dark red gothic interface MADE FOR THE PIXELL EVENT! . It features a vinyl-style album cover (which doesn't spin yet), playback controls, a progress bar, and a playlist where you can add your own audio files. 
 
 ![alt text](image.png)
 ![alt text](image-1.png)
@@ -18,7 +18,11 @@ A music player website with a dark red gothic interface MADE FOR THE PIXELL EVEN
 
 1. Download or clone the project (OR VISIT THE GITHUB PAGE)
 2. Open the main HTML file in a modern web browser.
-3. Click **Choose files** in the Playlist panel to add your own audio files, or select a track from the sample playlist.
+3. Click "+" button in the Playlist panel right to the heading to add your own audio files, or select a track from the sample playlist.
+
+You can use many different websites on the internet to covert youtube videos to MP3 format and download them which u can upload on this. Additionally, you can use gemini/ChatGPT to create a svg for the respective audio files which you can upload with it.
+
+Please note that the project doesn't cache any files u've uploaded or host those files. Any files uploaded will get deleted once the page is refreshed.
 
 ## Help
 
