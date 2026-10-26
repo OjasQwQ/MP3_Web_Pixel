@@ -174,6 +174,11 @@ function moveSlider(){
 
 const playlistItems = document.getElementById("playlist_items");
 const audioFilesInput = document.getElementById("audio_files");
+const addMusicButton = document.querySelector(".add_music");
+
+addMusicButton.addEventListener("click", function() {
+    audioFilesInput.click();
+});
 
 function renderPlayList() {
     playlistItems.replaceChildren();

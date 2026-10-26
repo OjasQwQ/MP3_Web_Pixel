@@ -1,7 +1,7 @@
 .background {
   background: linear-gradient(45deg, rgb(19, 0, 0), #880202, rgb(36, 2, 2), #a70e0e);
   background-size: 400% 400%;
-  animation: gradientShift 5s ease infinite;
+  animation: gradientShift 20s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -20,7 +20,7 @@
     margin: 5% auto;
     padding: 0 1rem;
 
-    backdrop-filter: url(#flt) blur(4px) saturate(180%);
+    backdrop-filter: url(#flt) blur(4px) saturate(200%);
     box-shadow: inset 0 1px 0 #ffffff5c;
 }
 
@@ -41,22 +41,36 @@
     overflow-x: hidden;
     border-width: 2px;
     background-color:rgba(19, 0, 0, 0.2);
+    text-align: center;
 }
 
 .playlist h2 {
-    margin-top: 0;
+    margin-top: 15px;
+    width: 100px;
+    position: relative;
 }
 
 .add_music {
-    display:inline-block;
-    margin-bottom: 1rem;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
     cursor: pointer;
+    position: relative;
 }
 
-#audio_files {
-    display:block;
-    max-width:100%;
-    margin-top: 0.5rem;
+.add_music:focus-visible {
+    outline: 2px solid rgb(17, 0, 0);
+    outline-offset: 2px;
+}
+
+.playlist_heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
 }
 
 .playlist-track {
@@ -71,6 +85,8 @@
 #playlist_items {
     display: grid;
     gap: 0.5rem;
+    background-color: #ff000038;
+    border-radius: 5%;
 }
 
 .playlist-track:hover,
@@ -79,7 +95,7 @@
 }
 
 .playlist-track:focus-visible {
-    outline: 2px solid crimson;
+    outline: 2px solid rgb(17, 0, 0);
     outline-offset: 2px;
 }
 
@@ -122,11 +138,11 @@
 }
 
 #music_buttons button[aria-pressed="true"] {
-    color: crimson;
+    color: rgb(17, 0, 0);
 }
 
 #music_buttons button:focus-visible {
-    outline: 2px solid crimson;
+    outline: 2px solid rgb(17, 0, 0);
     outline-offset: 2px;
 }
 
